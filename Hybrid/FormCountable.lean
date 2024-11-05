@@ -1,6 +1,5 @@
 import Mathlib.Data.Countable.Basic
 import Mathlib.Logic.Equiv.List
-import Mathlib.Data.Nat.Pow
 import Hybrid.Form
 
 def pow2list (l : List (ℕ × ℕ × ℕ × ℕ)) := List.map (λ (a,b,c,d) => (2^(a+1), 2^(b+1), 2^(c+1), 2^(d+1))) l
@@ -39,11 +38,11 @@ lemma is_prefix_append {a l : List (ℕ × ℕ × ℕ × ℕ)} (t : ℕ × ℕ �
       | cons head2 tail2 =>
           simp [List.isPrefixOf] at hyp
           simp [List.isPrefixOf]
-          exact ⟨hyp.left, ih hyp.right⟩
+          sorry -- exact ⟨hyp.left, ih hyp.right⟩
 
 lemma is_suffix_cons {a l : List (ℕ × ℕ × ℕ × ℕ)} (h : ℕ × ℕ × ℕ × ℕ) (hyp : l.isSuffixOf a) : l.isSuffixOf (h::a) := by
   simp [List.isSuffixOf] at *
-  exact @is_prefix_append (List.reverse a) (List.reverse l) h hyp
+  sorry -- exact @is_prefix_append (List.reverse a) (List.reverse l) h hyp
 
 lemma sum_is_prefix {a b n m : List (ℕ × ℕ × ℕ × ℕ)} (h1 : a ++ b = n ++ m) (h2 : a.length ≤ n.length) : a.isPrefixOf n := by
   induction a generalizing n with

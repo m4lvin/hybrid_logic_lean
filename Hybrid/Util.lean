@@ -1,4 +1,3 @@
-import Std.Logic
 open Classical
 
 theorem test (a b : Nat) : a = b → a + 1 = b + 1 := by intro h; simp [h]
@@ -8,9 +7,9 @@ def TypeIff.intro (a : Type u) (b : Type v) : (a → b) → (b → a) → (TypeI
   apply Prod.mk
 def TypeIff.mp  (p : TypeIff a b) : a → b := p.1
 def TypeIff.mpr (p : TypeIff a b) : b → a := p.2
-theorem TypeIff.refl : TypeIff a a := by
+def TypeIff.refl : TypeIff a a := by
   apply TypeIff.intro <;> (intro; assumption)
-theorem TypeIff.trans {h1 : TypeIff a b} {h2 : TypeIff b c} : TypeIff a c := by
+def TypeIff.trans {h1 : TypeIff a b} {h2 : TypeIff b c} : TypeIff a c := by
   apply TypeIff.intro
   . intro h
     exact h2.mp (h1.mp h)
@@ -18,7 +17,8 @@ theorem TypeIff.trans {h1 : TypeIff a b} {h2 : TypeIff b c} : TypeIff a c := by
     exact h1.mpr (h2.mpr h)
 infix:300 "iff" => TypeIff
 
-theorem choice_intro (q : α → Sort u) (p : α → Prop) (P : ∃ a, p a) : (∀ a, p a → q a) → q P.choose := by
+noncomputable
+def choice_intro (q : α → Sort u) (p : α → Prop) (P : ∃ a, p a) : (∀ a, p a → q a) → q P.choose := by
   intro h
   exact (h P.choose P.choose_spec)
 

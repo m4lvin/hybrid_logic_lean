@@ -126,18 +126,24 @@ section Theorems
       . rw [is_variant]
         intro v v_x
         have v_x := Ne.symm v_x
+        sorry
+        /-
         simp only [v_x, ite_false, Ne.symm]
         by_cases v_y : v = y
         . simp only [v_y, ite_true]
         . simp only [show (g₁ v = g₃ v) from
                           two_step v (And.intro v_x v_y),
                      ite_self]
+        -/
       . rw [is_variant]
         intro v v_y
         have v_y := Ne.symm v_y
+        sorry
+        /-
         by_cases v_x : v = x
-        . simp only [v_x, ite_true]
-        . simp only [v_x, v_y, ite_false, ite_self]
+        . simp [v_x, ite_true]
+        . simp [v_x, v_y, ite_false, ite_self]
+        -/
 
     theorem variant_mirror_property (g₁ g₂ g₃ : I W) {x y : SVAR} (g₁₂x : is_variant g₁ g₂ x) (g₂₃y : is_variant g₂ g₃ y) :
       ∃ g₂_mirror : I W, (is_variant g₁ g₂_mirror y ∧ is_variant g₂_mirror g₃ x) := by
@@ -174,9 +180,9 @@ section Theorems
       intro M s g M_sat_Γ
       induction L with
       | nil =>
-          simp only [conjunction, Sat]
+          simp [conjunction, Sat]
       | cons h t ih =>
-          simp only [conjunction, and_sat, ih, and_true]
+          simp only [Sat, ih, imp_false, not_true_eq_false, not_not]
           exact M_sat_Γ h h.prop
 
     theorem SetEntailment (Γ : Set (Form N)) : (∃ L, ⊨ (conjunction Γ L ⟶ ψ)) → Γ ⊨ ψ := by

@@ -3,3 +3,4 @@
 /build
 /Hybrid/Test.lean
 *.DS_Store
+.lake
